@@ -1,0 +1,14 @@
+version: '3.8'  # Рекомендуется использовать более новую версию
+
+services:
+  frontend:
+    image: ghcr.io/marsvest/vl_frontend:latest  # Используем образ
+    ports:
+      - "80:80"  # Порт, на котором будет доступен фронтенд
+    depends_on:
+      - backend  # Ожидаем, что бэкенд будет запущен
+
+  backend:
+    image: ghcr.io/marsvest/vl_backend:latest  # Используем образ
+    ports:
+      - "8000:8000"  # Порт, на котором будет доступен бэкенд
