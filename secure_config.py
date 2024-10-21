@@ -3,34 +3,80 @@ import sys
 import os
 
 
-def generate_key() -> None:
+def generate_key() -> str:
+    """Сгенерировать ключ
+
+    Returns:
+        str: Ключ
+    """
     return Fernet.generate_key().decode()
 
 
 def encrypt(data: str, key: str) -> str:
+    """Зашифровать данные
+
+    Args:
+        data (str): Полезная нагрузка
+        key (str): Ключ
+
+    Returns:
+        str: Зашифрованная полезная нагрузка
+    """
     fernet = Fernet(key.encode())
     encrypted_data = fernet.encrypt(data.encode())
     return encrypted_data.decode()
 
 
 def decrypt(encrypted_data: str, key: str) -> str:
+    """Расшифровка по ключу
+
+    Args:
+        encrypted_data (str): Зашифрованная полезная нагрузка
+        key (str): Ключ
+
+    Returns:
+        str: Расшифрованная полезная нагрузка
+    """
     fernet = Fernet(key.encode())
     decrypted_data = fernet.decrypt(encrypted_data.encode())
     return decrypted_data.decode()
 
 
 def read_file(filepath: str) -> str:
+    """Чтение файла
+
+    Args:
+        filepath (str): Путь к файлу
+
+    Returns:
+        str: Текст файла
+    """
     with open(filepath, "r") as file:
         text = file.read()
     return text
 
 
 def write_file(filepath: str, payload: str) -> None:
+    """Запись в файл
+
+    Args:
+        filepath (str): Путь к файлу
+        payload (str): Текст файла
+    """
     with open(filepath, "w") as file:
         file.write(payload)
 
 
 def find_all_envs(start_dir: str = ".", crypted: bool = False) -> list[str]:
+    """Поиск всех .env файлов
+
+    Args:
+        start_dir (str): Стартовая директория. Defaults to ".".
+        crypted (bool): Зашифрованные или расшифрованные. Defaults to False.
+
+    Returns:
+        list[str]: Все .env в директории
+    """
     env_files = []
     for root, _, files in os.walk(start_dir):
         for file in files:
@@ -44,6 +90,11 @@ def find_all_envs(start_dir: str = ".", crypted: bool = False) -> list[str]:
 
 
 def config_encrypt(secret_key: str) -> None:
+    """Полная зашифровка всех .env файлов
+
+    Args:
+        secret_key (str): Секртеный ключ
+    """
     env_files = find_all_envs()
 
     for env_file in env_files:
@@ -53,6 +104,11 @@ def config_encrypt(secret_key: str) -> None:
 
 
 def config_decrypt(secret_key: str) -> None:
+    """Полная расшифровка всех .env файлов
+
+    Args:
+        secret_key (str): Ключ
+    """
     env_files = find_all_envs(crypted=True)
 
     for env_file in env_files:
@@ -66,6 +122,7 @@ def config_decrypt(secret_key: str) -> None:
 
 
 def help() -> None:
+    """Сообщение помощи"""
     print("""
 Автошифроватор конфигов by Marsvest
 
