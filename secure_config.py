@@ -4,7 +4,7 @@ import os
 
 
 def generate_key() -> None:
-    print(Fernet.generate_key().decode())
+    return Fernet.generate_key().decode()
 
 
 def encrypt(data: str, key: str) -> str:
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         operation = sys.argv[1]
 
         if operation == "genkey":
-            generate_key()
+            print(generate_key())
         elif operation == "help":
             help()
 
