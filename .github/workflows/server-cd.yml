@@ -20,7 +20,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.CICD_TOKEN }}
 
-    - name: Download ssh connector
+    - name: Download ssh install 2connector
       run: sudo apt sshpass
 
     - name: Push to server
