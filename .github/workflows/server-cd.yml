@@ -29,5 +29,5 @@ jobs:
         sleep 10
 
     - name: Run new version
-      run: sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no -T root@87.236.22.76 docker compose -f vl_infrastructure/docker-compose.yml up --pull always
+      run: sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no -T root@87.236.22.76 docker compose -f vl_infrastructure/docker-compose.yml up --pull always -d
       
