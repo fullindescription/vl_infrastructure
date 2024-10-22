@@ -23,6 +23,11 @@ jobs:
     - name: Download ssh connector
       run: sudo apt install sshpass
 
-    - name: Push to server
-      run: sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no -T root@87.236.22.76 ls
+    - name: Stop Server
+      run: |
+        sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no -T root@87.236.22.76 docker compose -f vl_infrastructure/docker-compose.yml down
+        sleep 10
+
+    - name: Run new version
+      run: sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no -T root@87.236.22.76 docker compose -f vl_infrastructure/docker-compose.yml up --pull always
       
