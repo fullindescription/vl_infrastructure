@@ -24,5 +24,5 @@ jobs:
       run: sudo apt install sshpass
 
     - name: Push to server
-      run: sshpass -p '${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no -T root@87.236.22.76
+      run: sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no -T root@87.236.22.76 ls
       
