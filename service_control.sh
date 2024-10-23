@@ -19,6 +19,9 @@ case "$1" in
     (stop)
         stop
         ;;
+    (sync)
+        sync
+        ;;
     (*)
         echo "Использование: $0 {start|stop}"
         exit 1
