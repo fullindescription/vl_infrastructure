@@ -1,5 +1,7 @@
 start() {
-    docker compose -f vl_infrastructure/docker-compose.yml up --pull always -d
+    cd vl_infrastructure
+    export $(grep -v '^#' .env | xargs)
+    docker compose -f docker-compose.yml up --pull always -d
 }
 
 stop() {
